@@ -1,24 +1,25 @@
+## 项目介绍
+
+本项目参考 [hai-27](https://github.com/hai-27)，非本人原创，如有打扰，联系立删。
+
+
+
+
+
 # mypro
 
-## Project setup
+## 项目依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动项目
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包项目
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
