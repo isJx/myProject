@@ -55,6 +55,15 @@ export default {
             window.sessionStorage.setItem("user", temp); // 把登录信息存入session
             this.$store.commit("userState", res.data.result); // 把登录信息存储到vuex
             this.$store.commit("isLogin", false); // 关闭登录窗口
+            this.$message({
+              type: "success",
+              message: "登录成功!",
+            });
+          } else {
+            this.$message({
+              type: "warning",
+              message: "用户名或密码错误",
+            });
           }
         });
     },

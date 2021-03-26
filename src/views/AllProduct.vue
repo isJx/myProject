@@ -35,9 +35,161 @@
             </el-row>
             <!-- 卡片结束 -->
           </el-tab-pane>
-          <el-tab-pane label="手机" name="second">配置管理</el-tab-pane>
-          <el-tab-pane label="电视机" name="third">角色管理</el-tab-pane>
-          <el-tab-pane label="空调" name="fourth">定时任务补偿</el-tab-pane>
+
+          <el-tab-pane label="手机" name="second"
+            ><el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <el-tab-pane label="电视机" name="third"
+            ><el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <el-tab-pane label="空调" name="fourth">
+            <el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <!-- 洗衣机 -->
+          <el-tab-pane label="洗衣机" name="fifth">
+            <el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <el-tab-pane label="保护套" name="sixth">
+            <el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <el-tab-pane label="贴膜" name="seventh">
+            <el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+
+          <el-tab-pane label="充电器" name="eighth">
+            <el-row>
+              <el-col
+                :span="4"
+                v-for="(item, index) of product"
+                :key="index"
+                style="margin: 10px 20px"
+              >
+                <el-card :body-style="{ textAlign: 'center' }" shadow="hover">
+                  <a class="card-a" href="javascript:;" @click="details(item.product_id)">
+                    <img style="width: 100%" :src="require(`../assets/${item.product_picture}`)" />
+                    <div style="padding: 8px">
+                      <span class="card-name">{{ item.product_name }}</span>
+                      <p class="card-title">{{ item.product_title }}</p>
+                      <p class="card-price">{{ item.product_price }} 元</p>
+                    </div>
+                  </a>
+                </el-card>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -46,30 +198,37 @@
 </template>
 
 <script>
-// import AlertInput from "../components/AlertInput.vue";
-// import MyHeader from "../components/MyHeader.vue";
 export default {
-  // components: { AlertInput, MyHeader },
   data() {
     return {
       activeName: "first",
-      // category_id: 1
-      // product_id: 1
-      // product_intro: "120Hz高帧率流速屏/ 索尼6400万前后六摄 / 6.67'小孔径全面屏 / 最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC"
-      // product_name: "Redmi K30"
-      // product_num: 10
-      // product_picture: "public/imgs/phone/Redmi-k30.png"
-      // product_price: 2000
-      // product_sales: 0
-      // product_selling_price: 1599
-      // product_title: "120Hz流速屏，全速热爱"
       product: [], // 保存请求到的商品
     };
   },
   methods: {
     handleClick(event) {
-      console.log(event);
+      let id = event.index;
+      // 判断是否显示全部商品,大于0 则是分类查询
+      if (id > 0) {
+        this.axios
+          .get("/api/getclass", {
+            params: {
+              id,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            // this.product.length = 0;
+            this.product = res.data;
+          });
+      } else {
+        // 等于0, 则查询所有商品列表
+        this.axios.get("/api/product").then((res) => {
+          this.product = res.data;
+        });
+      }
     },
+    // 根据商品id, 跳转到详情页
     details(pid) {
       this.$router.push(`/details/${pid}`);
     },

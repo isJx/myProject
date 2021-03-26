@@ -11,7 +11,7 @@
       </div>
     </div>
     <hr />
-    <div class="cart box">
+    <div v-if="this.shopObj.length > 0" class="cart box">
       <ul class="cart-ul">
         <li class="cart-li">
           <div><el-checkbox>全选</el-checkbox></div>
@@ -24,7 +24,7 @@
         <!-- 循环遍历购物车 -->
         <li class="item" v-for="(item, i) in shopObj" :key="i">
           <div>
-            <el-checkbox></el-checkbox>
+            <input type="checkbox" @click="check(i)" />
             <span
               style="
                 background-color: pink;
@@ -47,7 +47,7 @@
           <div>
             <el-input-number
               v-model="item.pcount"
-              @change="handleChange"
+              @change="handleChange($event, item.cid)"
               :min="1"
               :max="10"
               label="描述文字"
@@ -59,15 +59,33 @@
           </div>
           <div>
             <p>
-              <el-button type="info" icon="el-icon-close" circle size="mini"></el-button>
+              <el-button
+                type="info"
+                icon="el-icon-close"
+                circle
+                size="mini"
+                @click="del(item.cid)"
+              ></el-button>
             </p>
           </div>
         </li>
       </ul>
     </div>
+    <div v-else class="ifels">
+      <div>
+        <img src="../assets/imgs_q/cart-empty.png" alt="" />
+      </div>
+      <div style="background-color: #f7f7f7">
+        <h1>您的购物车还是空的!</h1>
+        <p></p>
+        <h2>快去购物吧</h2>
+      </div>
+    </div>
     <div class="goto">
-      <a href="javascript:;">继续购物</a>
-      <p class="kkk">共 <span>1</span> 件商品，已选择 <span>0</span> 件</p>
+      <a href="javascript:;" @click="goToIndex">继续购物</a>
+      <p class="kkk">
+        共 <span>{{ this.shopObj.length }}</span> 件商品，已选择 <span>0</span> 件
+      </p>
       <p class="price">合计: <span>0元</span></p>
       <button class="btn">去结算</button>
     </div>
@@ -79,11 +97,57 @@ export default {
   props: ["uid"],
   data() {
     return {
-      shopObj: [],
+      shopObj: [], // 商品列表
+      antiShake: 1,
     };
   },
   methods: {
-    handleChange() {},
+    // 修改购物车商品件数
+    handleChange($event, cid) {
+      if (this.antiShake == 1) {
+        this.antiShake = 0;
+        this.axios
+          .get("/api/upd", {
+            params: {
+              cid: cid,
+              count: $event,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            this.antiShake = res.data;
+          });
+      }
+    },
+    // 删除商品
+    del(cid) {
+      console.log(cid);
+      this.axios
+        .get("/api/del", {
+          params: {
+            cid: cid,
+          },
+        })
+        .then((res) => {
+          if (res.data == 1) {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+          } else {
+            this.$message({
+              type: "warning",
+              message: "删除失败",
+            });
+          }
+          setTimeout(() => {
+            this.$router.go(0);
+          }, 1000);
+        });
+    },
+    goToIndex() {
+      this.$router.push("/product");
+    },
   },
   // 页面创建时计算购物车商品的价格
   created() {
@@ -103,6 +167,15 @@ export default {
 </script>
 
 <style scoped>
+.ifels {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+}
 .price {
   display: inline-block;
   margin-top: 0px;

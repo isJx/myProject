@@ -76,8 +76,25 @@ export default {
     },
     // 注销用户的函数
     logout() {
-      window.sessionStorage.clear();
-      this.$store.commit("logout");
+      this.$confirm("确定要退出登录吗, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          window.sessionStorage.clear();
+          this.$store.commit("logout");
+          this.$message({
+            type: "success",
+            message: "已退出登录!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消操作",
+          });
+        });
     },
     // 进入购物车
     goCart() {

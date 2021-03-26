@@ -70,18 +70,40 @@ export default {
     };
   },
   methods: {
+    // 加入购物车
     addCart(pid) {
+      // 加购前判断是否登录, 如果已登录则执行if语句
       if (this.$store.state.user.userState == 1) {
         let uid = this.$store.state.user.userMsg.uid;
         console.log("用户id" + uid, "商品id" + pid);
-        this.axios.get("/api/addcart", {
-          params: {
-            uid: uid,
-            pid: pid,
+        this.axios
+          .get("/api/addcart", {
+            params: {
+              uid: uid,
+              pid: pid,
+            },
+          })
+          .then((res) => {
+            if (res.data == 1) {
+              this.$message({
+                type: "success",
+                message: "已加入购物车!",
+              });
+            } else {
+              this.$message({
+                type: "warning",
+                message: "加入购物车失败!",
+              });
+            }
+          });
+      } else {
+        // 如果没有登陆, 则执行else
+        this.$alert("您还没有登录, 请先登录", "标题", {
+          confirmButtonText: "确定",
+          callback: () => {
+            this.$store.commit("isLogin", true);
           },
         });
-      } else {
-        alert("请先登录");
       }
     },
   },
