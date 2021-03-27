@@ -2,6 +2,7 @@
   <div>
     <my-header> </my-header>
     <alert-input></alert-input>
+    <my-register></my-register>
     <div class="details">
       <div>
         <p style="font-size: 20px; margin: 20px; display: inline-block">{{ data.product_name }}</p>
@@ -50,7 +51,7 @@
           <!-- 收藏 加购 -->
           <div>
             <el-button class="btn-left" @click="addCart(data.product_id)">加入购物车</el-button>
-            <el-button class="btn-right">喜欢</el-button>
+            <el-button class="btn-right" @click="addFavorite(data.product_id)">喜欢</el-button>
           </div>
         </el-col>
       </el-row>
@@ -60,8 +61,9 @@
 
 <script>
 import AlertInput from "../components/AlertInput.vue";
+import MyRegister from "../components/MyRegister.vue";
 export default {
-  components: { AlertInput },
+  components: { AlertInput, MyRegister },
   props: ["pid"],
   data() {
     return {
@@ -103,6 +105,32 @@ export default {
           callback: () => {
             this.$store.commit("isLogin", true);
           },
+        });
+      }
+    },
+    addFavorite(pid) {
+      let uid = this.$store.state.user.userMsg.uid;
+      if (this.$store.state.user.userState == 1) {
+        this.axios
+          .get("/api/addfavorite", {
+            params: {
+              uid: uid,
+              pid: pid,
+            },
+          })
+          .then((res) => {
+            if (res.data == 1) {
+              this.$message({
+                type: "success",
+                message: "已加入收藏夹!",
+              });
+            } else {
+              this.$message.error("请勿重复添加");
+            }
+          });
+      } else {
+        this.$alert("您还没登录,请先登录!", "提示", {
+          confirmButtonText: "确定",
         });
       }
     },

@@ -2,6 +2,7 @@
   <div>
     <my-header></my-header>
     <alert-input></alert-input>
+    <my-register></my-register>
     <div id="box">
       <div id="bre">
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -198,7 +199,9 @@
 </template>
 
 <script>
+import MyRegister from "../components/MyRegister.vue";
 export default {
+  components: { MyRegister },
   data() {
     return {
       activeName: "first",

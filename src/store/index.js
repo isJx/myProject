@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false, // 控制登录页, true为显示, false为不显示
+    isRegister: false, // 控制注册页是否显示, true为显示
     // 储存当前用户信息
     user: {
       // 用户状态
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     // 控制登录页面是否显示
     isLogin(state, payload) {
       state.isLogin = payload;
+    },
+    isRegister(state, payload) {
+      state.isRegister = payload;
     },
     // 登录成功,储存用户信息
     userState(state, payload) {
@@ -34,6 +38,9 @@ export default new Vuex.Store({
   getters: {
     getShowLogin(state) {
       return state.isLogin;
+    },
+    getIsRegister(state) {
+      return state.isRegister;
     },
   },
 });

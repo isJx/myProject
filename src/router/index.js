@@ -4,10 +4,12 @@ import Index from "../views/Index.vue";
 import AllProduct from "../views/AllProduct.vue";
 import Details from "../views/Details.vue";
 import Cart from "../views/Cart.vue";
+import Favorite from "../views/Favorite.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/favorite/:uid", component: Favorite, props: true },
   { path: "/cart/:uid", component: Cart, props: true },
   { path: "/", component: Index },
   { path: "/product", component: AllProduct },

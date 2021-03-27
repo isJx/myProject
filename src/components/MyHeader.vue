@@ -4,7 +4,7 @@
       <ul>
         <li v-if="this.$store.state.user.userState == 0">
           <el-button type="text" @click="isLogin(true)">登录</el-button>
-          <el-button type="text">注册</el-button>
+          <el-button type="text" @click="isRegister(true)">注册</el-button>
         </li>
         <li v-else class="one">
           <el-button type="text"
@@ -18,7 +18,7 @@
           <el-button type="text">我的订单</el-button>
         </li>
         <li>
-          <el-button type="text">我的收藏</el-button>
+          <el-button type="text" @click="toFavorite"> 我的收藏 </el-button>
         </li>
         <li>
           <el-button
@@ -74,6 +74,9 @@ export default {
     isLogin(payload) {
       this.$store.commit("isLogin", payload);
     },
+    isRegister(payload) {
+      this.$store.commit("isRegister", payload);
+    },
     // 注销用户的函数
     logout() {
       this.$confirm("确定要退出登录吗, 是否继续?", "提示", {
@@ -99,9 +102,17 @@ export default {
     // 进入购物车
     goCart() {
       if (this.$store.state.user.userState == 0) {
-        alert("请先登录");
+        this.$store.commit("isLogin", true);
       } else {
         this.$router.push(`/cart/${this.$store.state.user.userMsg.uid}`);
+      }
+    },
+    // 进入收藏页
+    toFavorite() {
+      if (this.$store.state.user.userState == 0) {
+        this.$store.commit("isLogin", true);
+      } else {
+        this.$router.push(`/favorite/${this.$store.state.user.userMsg.uid}`);
       }
     },
   },

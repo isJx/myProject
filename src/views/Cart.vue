@@ -24,7 +24,7 @@
         <!-- 循环遍历购物车 -->
         <li class="item" v-for="(item, i) in shopObj" :key="i">
           <div>
-            <input type="checkbox" @click="check(i)" />
+            <input type="checkbox" @click="check(item.product_price * item.pcount)" />
             <span
               style="
                 background-color: pink;
@@ -102,6 +102,9 @@ export default {
     };
   },
   methods: {
+    check(val) {
+      console.log(val);
+    },
     // 修改购物车商品件数
     handleChange($event, cid) {
       if (this.antiShake == 1) {
