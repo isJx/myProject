@@ -77,7 +77,6 @@ export default {
       // 加购前判断是否登录, 如果已登录则执行if语句
       if (this.$store.state.user.userState == 1) {
         let uid = this.$store.state.user.userMsg.uid;
-        console.log("用户id" + uid, "商品id" + pid);
         this.axios
           .get("/api/addcart", {
             params: {

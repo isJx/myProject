@@ -105,7 +105,6 @@ export default {
       this.carousel = res.data;
     });
     this.axios.get("/api/product").then((res) => {
-      console.log(res.data);
       let temp = res.data;
       temp.forEach((item) => {
         // 循环出手机商品, 存入数组中
@@ -120,7 +119,6 @@ export default {
           }
         }
       });
-      console.log(this.product);
     });
   },
 };

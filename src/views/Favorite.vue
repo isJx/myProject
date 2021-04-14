@@ -61,7 +61,6 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data);
         this.favorite = res.data;
       });
   },

@@ -14,7 +14,7 @@
     <div v-if="this.shopObj.length > 0" class="cart box">
       <ul class="cart-ul">
         <li class="cart-li">
-          <div><el-checkbox>全选</el-checkbox></div>
+          <div><input type="checkbox" @click="changeCheck($event)" /><span> 全选 </span></div>
           <div><p>商品名称</p></div>
           <div><p>单价</p></div>
           <div><p>数量</p></div>
@@ -24,7 +24,7 @@
         <!-- 循环遍历购物车 -->
         <li class="item" v-for="(item, i) in shopObj" :key="i">
           <div>
-            <input type="checkbox" @click="check(item.product_price * item.pcount)" />
+            <input type="checkbox" :checked="checkAll" @click="check($event, item)" />
             <span
               style="
                 background-color: pink;
@@ -84,10 +84,13 @@
     <div class="goto">
       <a href="javascript:;" @click="goToIndex">继续购物</a>
       <p class="kkk">
-        共 <span>{{ this.shopObj.length }}</span> 件商品，已选择 <span>0</span> 件
+        共 <span>{{ this.shopObj.length }}</span> 件商品，已选择
+        <span>{{ xuanzhong.length }}</span> 件
       </p>
-      <p class="price">合计: <span>0元</span></p>
-      <button class="btn">去结算</button>
+      <p class="price">
+        合计: <span>{{ total }}元</span>
+      </p>
+      <button class="btn" @click="close">去结算</button>
     </div>
     <my-footer></my-footer>
   </div>
@@ -99,11 +102,43 @@ export default {
     return {
       shopObj: [], // 商品列表
       antiShake: 1,
+      checkAll: false,
+      xuanzhong: [], //创建变量,用于保存计算价格的商品
     };
   },
+  computed: {
+    // 计算购物车的价格
+    total() {
+      var total = 0;
+      for (var obj of this.xuanzhong) {
+        total += obj.pcount * obj.product_price;
+      }
+      return total;
+    },
+  },
   methods: {
-    check(val) {
-      console.log(val);
+    // 全选按钮,判断是添加到数组还是清空数组
+    changeCheck(e) {
+      this.checkAll = !this.checkAll;
+      if (e.target.checked == true) {
+        this.xuanzhong = [];
+        this.xuanzhong = this.shopObj;
+      } else {
+        this.xuanzhong = [];
+      }
+    },
+    // 商品单选按钮,判断商品是否选中
+    check(e, item) {
+      if (e.target.checked == true) {
+        this.xuanzhong.push(item);
+      } else {
+        for (var obj in this.xuanzhong) {
+          if (this.xuanzhong[obj].cid == item.cid) {
+            this.xuanzhong.splice(obj, 1);
+          }
+        }
+        console.log(this.xuanzhong);
+      }
     },
     // 修改购物车商品件数
     handleChange($event, cid) {
@@ -125,46 +160,33 @@ export default {
     // 删除商品
     del(cid) {
       console.log(cid);
-      this.axios
-        .get("/api/del", {
-          params: {
-            cid: cid,
-          },
-        })
-        .then((res) => {
-          if (res.data == 1) {
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-            });
-          } else {
-            this.$message({
-              type: "warning",
-              message: "删除失败",
-            });
-          }
-          setTimeout(() => {
-            this.$router.go(0);
-          }, 1000);
-        });
+      this.axios.get("/api/del", { params: { cid: cid } }).then((res) => {
+        if (res.data == 1) {
+          this.$message({ type: "success", message: "删除成功!" });
+        } else {
+          this.$message({ type: "warning", message: "删除失败" });
+        }
+        setTimeout(() => {
+          this.$router.go(0);
+        }, 1000);
+      });
     },
     goToIndex() {
       this.$router.push("/product");
+    },
+    close() {
+      this.$alert("暂未开发，实属抱歉！！！", "提示", {
+        confirmButtonText: "确定",
+        type: "warning",
+      });
     },
   },
   // 页面创建时计算购物车商品的价格
   created() {
     // 发送请求,查看该用户购物车的内容
-    this.axios
-      .get("/api/setcart", {
-        params: {
-          uid: this.uid,
-        },
-      })
-      .then((res) => {
-        this.shopObj = res.data;
-        console.log(this.shopObj);
-      });
+    this.axios.get("/api/setcart", { params: { uid: this.uid } }).then((res) => {
+      this.shopObj = res.data;
+    });
   },
 };
 </script>
@@ -183,7 +205,7 @@ export default {
   display: inline-block;
   margin-top: 0px;
   margin-bottom: 0px;
-  margin-left: 560px;
+  margin-left: 500px;
   font-size: 14px;
   color: #ff6700;
 }
