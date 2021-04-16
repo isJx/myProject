@@ -1,8 +1,9 @@
 <template>
   <div>
-    <my-header></my-header>
-    <alert-input></alert-input>
-    <my-register></my-register>
+    <MyHeader></MyHeader>
+    <Login></Login>
+    <MyRegister></MyRegister>
+
     <div id="box">
       <div id="bre">
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -194,14 +195,17 @@
         </el-tabs>
       </div>
     </div>
-    <my-footer></my-footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import MyHeader from "../components/MyHeader";
+import Login from "../components/AlertInput";
+import Footer from "../components/Footer";
 import MyRegister from "../components/MyRegister.vue";
 export default {
-  components: { MyRegister },
+  components: { MyRegister, Footer, Login, MyHeader },
   data() {
     return {
       activeName: "first",

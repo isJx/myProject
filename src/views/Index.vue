@@ -1,8 +1,8 @@
 <template>
   <div class="index">
-    <my-header></my-header>
-    <alert-input></alert-input>
-    <my-register></my-register>
+    <MyHeader></MyHeader>
+    <Login></Login>
+    <MyRegister></MyRegister>
     <div style="margin-top: 20px"></div>
     <div id="box">
       <!-- 轮播图 -->
@@ -51,8 +51,8 @@
           <el-col :span="6">
             <el-card>
               <a href="javascript:;">
-                <img src="../assets/imgs/appliance/appliance-promo1.png" alt="" />
-                <img src="../assets/imgs/appliance/appliance-promo2.png" alt="" />
+                <img src="../assets/imgs/appliance/appliance-promo1.png" />
+                <img src="../assets/imgs/appliance/appliance-promo2.png" />
               </a>
             </el-card>
           </el-col>
@@ -74,14 +74,17 @@
         </el-row>
       </div>
     </div>
-    <my-footer></my-footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-// import AlertInput from "../components/AlertInput.vue";
+import MyHeader from "../components/MyHeader";
+import Footer from "../components/Footer";
+import MyRegister from "../components/MyRegister";
+import Login from "../components/AlertInput";
 export default {
-  // components: { AlertInput },
+  components: { MyHeader, Footer, MyRegister, Login },
   data() {
     return {
       // 轮播图间隔:毫秒
@@ -143,9 +146,14 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid rgb(216, 211, 211);
+  transition: all 0.3s;
 }
 .index .li p {
   margin: 0px;
+}
+.index .li:hover {
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  transform: translate3d(0, -2px, 0);
 }
 .index .a {
   display: flex;

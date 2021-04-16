@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header></my-header>
+    <MyHeader></MyHeader>
     <div class="cart">
       <div class="cartnav">
         <div>
@@ -92,18 +92,21 @@
       </p>
       <button class="btn" @click="close">去结算</button>
     </div>
-    <my-footer></my-footer>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import MyHeader from "../components/MyHeader";
+import Footer from "../components/Footer";
 export default {
+  components: { MyHeader, Footer },
   props: ["uid"],
   data() {
     return {
       shopObj: [], // 商品列表
       antiShake: 1,
       checkAll: false,
-      xuanzhong: [], //创建变量,用于保存计算价格的商品
+      xuanzhong: [], //保存计算价格的商品
     };
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header></my-header>
+    <MyHeader></MyHeader>
     <div class="favorite">
       <img style="width: 40px; height: 40px" src="../assets/favorite.png" alt="" />
       <p>我的收藏</p>
@@ -28,12 +28,15 @@
         <h2>快去购物吧</h2>
       </div>
     </div>
-    <my-footer></my-footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import MyHeader from "../components/MyHeader";
+import Footer from "../components/Footer";
 export default {
+  components: { MyHeader, Footer },
   props: ["uid"],
   data() {
     return {

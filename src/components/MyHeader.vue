@@ -49,7 +49,7 @@
           router
         >
           <el-menu-item style="margin-right: 20px">
-            <img src="../assets/imgs_q/logo.png" alt="" />
+            <img src="../assets/imgs_q/logo.png" />
           </el-menu-item>
           <el-menu-item index="/">首页</el-menu-item>
           <el-menu-item index="/product">全部商品</el-menu-item>

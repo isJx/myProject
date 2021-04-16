@@ -1,8 +1,8 @@
 <template>
   <div>
-    <my-header> </my-header>
-    <alert-input></alert-input>
-    <my-register></my-register>
+    <MyHeader></MyHeader>
+    <Login></Login>
+    <MyRegister></MyRegister>
     <div class="details">
       <div>
         <p style="font-size: 20px; margin: 20px; display: inline-block">{{ data.product_name }}</p>
@@ -60,10 +60,11 @@
 </template>
 
 <script>
-import AlertInput from "../components/AlertInput.vue";
-import MyRegister from "../components/MyRegister.vue";
+import MyHeader from "../components/MyHeader";
+import Login from "../components/AlertInput";
+import MyRegister from "../components/MyRegister";
 export default {
-  components: { AlertInput, MyRegister },
+  components: { MyHeader, MyRegister, Login },
   props: ["pid"],
   data() {
     return {
@@ -101,9 +102,9 @@ export default {
         // 如果没有登陆, 则执行else
         this.$alert("您还没有登录, 请先登录", "标题", {
           confirmButtonText: "确定",
-          callback: () => {
-            this.$store.commit("isLogin", true);
-          },
+          // callback: () => {
+          //   this.$store.commit("isLogin", true);
+          // },
         });
       }
     },
