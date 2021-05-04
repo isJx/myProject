@@ -241,6 +241,7 @@ export default {
     },
   },
   mounted() {
+    console.log("发送一次请求,拿到所有商品");
     this.axios.get("/api/product").then((res) => {
       this.product = res.data;
     });

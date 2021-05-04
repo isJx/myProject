@@ -20,6 +20,9 @@ const routes = [
   {
     path: "/product",
     name: "AllProduct",
+    meta: {
+      keepAlive: true,
+    },
     component: () => import(/* webpackChunkName: "allproduct" */ "../views/AllProduct.vue"),
   },
   {
@@ -36,10 +39,9 @@ const routes = [
   {
     path: "/",
     component: Index,
-    // 缓存设置
-    // meta: {
-    //   keepAlive: true,
-    // },
+    meta: {
+      keepAlive: true,
+    },
   },
 ];
 

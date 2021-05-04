@@ -108,6 +108,7 @@ export default {
       this.carousel = res.data;
     });
     this.axios.get("/api/product").then((res) => {
+      console.log(`向/product发送了一次请求`);
       let temp = res.data;
       temp.forEach((item) => {
         // 循环出手机商品, 存入数组中

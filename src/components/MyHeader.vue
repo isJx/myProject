@@ -71,6 +71,9 @@ export default {
     };
   },
   methods: {
+    btn(e) {
+      console.log(e.target);
+    },
     isLogin(payload) {
       this.$store.commit("isLogin", payload);
     },
