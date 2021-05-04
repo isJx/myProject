@@ -16,4 +16,4 @@ npm run serve
 npm run build
 ```
 
-### 太难了
+### 太难了啊
